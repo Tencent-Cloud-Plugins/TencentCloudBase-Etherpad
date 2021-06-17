@@ -1,0 +1,63 @@
+{
+  "version": "2.0",
+  "envId": "{{env.ENV_ID}}",
+  "framework": {
+    "name": "Etherpad",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-container",
+        "inputs": {
+          "serviceName": "etherpad",
+          "servicePath": "/",
+          "uploadType": "image",
+          "cpu": 1,
+          "mem": 2,
+          "imageInfo": {
+            "imageUrl": "ccr.ccs.tencentyun.com/tcbimages/etherpad-tcb:1.0"
+          },
+          "containerPort": 9001,
+          "envVariables": {
+            "DB_TYPE": "mysql",
+            "DB_HOST": "{{env.DB_IP}}",
+            "DB_NAME": "etherpad",
+            "DB_PORT": "{{env.DB_PORT}}",
+            "DB_USER": "{{env.MYSQL_USERNAME}}",
+            "DB_PASS": "{{env.MYSQL_PASSWORD}}",
+            "ADMIN_PASSWORD": "{{env.ADMIN_PASSWORD}}",
+            "PORT": "9001",
+            "TCB_NOT_SHOW_CYNOS_DB": "${Outputs.flarum.Properties.InstanceId}"
+          },
+          "volumeMounts": {
+            "/opt/etherpad-lite/var": "etherpad-cfs"
+          },
+          "initialDelaySeconds": 10
+        }
+      }
+    },
+    "requirement": {
+      "addons": [
+        {
+          "type": "CynosDB",
+          "name": "flarum",
+          "envMap": {
+            "IP": "DB_IP",
+            "PORT": "DB_PORT",
+            "USERNAME": "MYSQL_USERNAME",
+            "PASSWORD": "MYSQL_PASSWORD"
+          }
+        },
+        {
+          "type": "CFS",
+          "name": "etherpad-cfs"
+        }
+      ],
+      "environment": {
+        "ADMIN_PASSWORD": {
+          "description": "用户密码",
+          "required": true,
+          "default": "admin@123"
+        }
+      }
+    }
+  }
+}
