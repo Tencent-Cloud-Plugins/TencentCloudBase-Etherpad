@@ -25,7 +25,7 @@
             "DB_PASS": "{{env.MYSQL_PASSWORD}}",
             "ADMIN_PASSWORD": "{{env.ADMIN_PASSWORD}}",
             "PORT": "9001",
-            "TCB_NOT_SHOW_CYNOS_DB": "${Outputs.flarum.Properties.InstanceId}"
+            "TCB_NOT_SHOW_CYNOS_DB": "${Outputs.etherpad.Properties.InstanceId}"
           },
           "volumeMounts": {
             "/opt/etherpad-lite/var": "etherpad-cfs"
@@ -38,7 +38,7 @@
       "addons": [
         {
           "type": "CynosDB",
-          "name": "flarum",
+          "name": "etherpad",
           "envMap": {
             "IP": "DB_IP",
             "PORT": "DB_PORT",
