@@ -27,9 +27,6 @@
             "PORT": "9001",
             "TCB_NOT_SHOW_CYNOS_DB": "${Outputs.etherpad.Properties.InstanceId}"
           },
-          "volumeMounts": {
-            "/opt/etherpad-lite/var": "etherpad-cfs"
-          },
           "initialDelaySeconds": 20
         }
       }
@@ -45,10 +42,6 @@
             "USERNAME": "MYSQL_USERNAME",
             "PASSWORD": "MYSQL_PASSWORD"
           }
-        },
-        {
-          "type": "CFS",
-          "name": "etherpad-cfs"
         }
       ],
       "environment": {
