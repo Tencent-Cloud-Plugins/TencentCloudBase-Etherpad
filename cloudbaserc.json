@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "1.0",
   "envId": "{{env.ENV_ID}}",
   "framework": {
     "name": "Etherpad",
@@ -30,7 +30,7 @@
           "volumeMounts": {
             "/opt/etherpad-lite/var": "etherpad-cfs"
           },
-          "initialDelaySeconds": 10
+          "initialDelaySeconds": 20
         }
       }
     },
